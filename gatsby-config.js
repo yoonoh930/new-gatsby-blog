@@ -24,6 +24,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/wiki`,
+        name: `wiki`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
@@ -54,6 +61,12 @@ module.exports = {
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
+      },
+    },
+    {
+      resolve: `gatsby-remark-images`,
+      options: {
+        maxWidth: 590,
       },
     },
     `gatsby-transformer-sharp`,

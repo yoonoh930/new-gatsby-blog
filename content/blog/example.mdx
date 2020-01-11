@@ -6,10 +6,29 @@ description: "A post showing MDX in action"
 
 This is a post showing MDX in action. This starter now comes with MDX out-of-the-box!
 
-```js
+```js{1,4-6}
 // you can write JSX in your Markdown!
+
 <button>test</button>
+const js = oncreate({}) => {
+
+}
+
+// gatsby-config.js
+resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+            {
+          resolve: `gatsby-remark-prismjs`,
+          options: {
+            aliases:{sh: "bash", js:"javascript"},
+            showLineNumbers: true,
+          }
+        }],
+      },
+
 ```
+
 
 <button>test</button>
 

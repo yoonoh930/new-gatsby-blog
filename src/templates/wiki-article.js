@@ -1,9 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+
+import MDXRenderer from "../components/MDX"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+
 import { rhythm, scale } from "../utils/typography"
 
 class WikiArticleTemplate extends React.Component {
@@ -12,7 +14,7 @@ class WikiArticleTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={this.props.location} title="Yoon's Wiki">
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
@@ -37,7 +39,7 @@ class WikiArticleTemplate extends React.Component {
               {post.frontmatter.date}
             </p>
           </header>
-          <MDXRenderer>{post.body}</MDXRenderer>
+          <MDXRenderer content={post.body}/>
           <hr
             style={{
               marginBottom: rhythm(1),

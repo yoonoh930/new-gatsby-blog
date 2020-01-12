@@ -59,7 +59,7 @@ const Bio = () => {
         marginTop: `auto`,
         marginBottom: `auto`,
         }}>
-        Written by <strong>{author}</strong> in order to reverse entropy of the life.
+        Written by <strong>{author}</strong> in effort to reverse entropy of life.
       </p>
     </div>
   )

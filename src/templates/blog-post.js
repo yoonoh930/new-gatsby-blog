@@ -1,9 +1,12 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+// import { MDXRenderer } from "gatsby-plugin-mdx"
+
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import MDXRenderer from "../components/MDX"
+
 import { rhythm, scale } from "../utils/typography"
 
 class BlogPostTemplate extends React.Component {
@@ -38,7 +41,7 @@ class BlogPostTemplate extends React.Component {
               {post.frontmatter.date}
             </p>
           </header>
-          <MDXRenderer>{post.body}</MDXRenderer>
+          <MDXRenderer content={post.body}/>
           <hr
             style={{
               marginBottom: rhythm(1),

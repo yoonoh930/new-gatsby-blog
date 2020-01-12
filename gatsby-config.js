@@ -51,11 +51,6 @@ module.exports = {
             resolve: `gatsby-remark-prismjs`,
             options: {
               showLineNumbers: true,
-              prompt: {
-                user: "Yoon",
-                host: "localhost",
-                global: true,
-              },
             }
           },
           `gatsby-remark-copy-linked-files`,

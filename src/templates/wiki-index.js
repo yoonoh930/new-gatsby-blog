@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "gatsby"
 
 import styled from "@emotion/styled";
-import { rhythm } from "../utils/typography"
 
 class WikiItems extends React.Component {
 
@@ -38,8 +37,6 @@ class WikiItems extends React.Component {
     };
 
     render() {
-        const posts = this.props.wikiNodes
-
         const tagsNode = this.getTagsNodes();
 
         const WikiContainer = styled.div`

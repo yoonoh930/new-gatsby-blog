@@ -11,7 +11,6 @@ import { rhythm, scale } from "../utils/typography"
 class WikiArticleTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
-    const siteTitle = this.props.data.site.siteMetadata.title
 
     return (
       <Layout location={this.props.location} title="Yoon's Wiki">

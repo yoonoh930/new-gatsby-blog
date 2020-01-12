@@ -11,48 +11,127 @@ class Layout extends React.Component {
   render() {
     const { location, title, children } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
+    const Nav = styled.nav`
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      a {
+          ${scale(1/10)};
+          margin-left: ${rhythm(1)};
+          color: inherit;
+          text-decoration: none;
+          box-shadow: none;
+      }
+    `;
+    const Header = styled.nav`
+      display: flex;
+      justify-content: space-between;
+    `;
     let header
 
     if (location.pathname === rootPath) {
       header = (
-        <h1
+        <div
           style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
+            display: `flex`,
+            justifyContent: `space-between`,
           }}
         >
-          <Link
+          <h1
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              ...scale(1.5),
+              marginBottom: rhythm(1.5),
+              marginTop: 0,
             }}
-            to={`/`}
           >
-            {title}
-          </Link>
-        </h1>
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to={`/`}
+            >
+              {title}
+            </Link>
+          </h1>
+          <nav
+            style={{
+              display: `flex`,
+              justifyContent: `flex-end`,
+              alignItems: `center`,
+              fontSize: `1.5rem`,
+            }}>
+            <Link
+              style={{
+                color: `#CECECE`,
+                textDecoration: `none`,
+                boxShadow: `none`,
+              }} 
+              to='/wiki'>Wiki
+            </Link>
+            <Link
+              style={{
+                color: `#CECECE`,
+                textDecoration: `none`,
+                boxShadow: `none`,
+                marginLeft: `${rhythm(0.5)}`
+              }} 
+              to='/'>Blog
+            </Link>
+          </nav>
+        </div>
       )
     } else {
       header = (
-        <h3
+        <div
           style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
+            display: `flex`,
           }}
         >
-          <Link
+          <h3
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              fontFamily: `Montserrat, sans-serif`,
+              marginTop: 0,
             }}
-            to={`/`}
           >
-            {title}
-          </Link>
-        </h3>
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to={`/`}
+            >
+              {title}
+            </Link>
+          </h3>
+          <nav
+            style={{
+              display: `flex`,
+              justifyContent: `flex-end`,
+              fontSize: `1rem`,
+              marginLeft: `${rhythm(1)}`,
+            }}>
+            <Link
+              style={{
+                color: `#CECECE`,
+                textDecoration: `none`,
+                boxShadow: `none`,
+              }} 
+              to='/wiki'>Wiki
+            </Link>
+            <Link
+              style={{
+                color: `#CECECE`,
+                textDecoration: `none`,
+                boxShadow: `none`,
+                marginLeft: `${rhythm(1/2)}`,
+              }}
+              to='/'>Blog
+            </Link>
+          </nav>
+        </div>
       )
     }
     return (

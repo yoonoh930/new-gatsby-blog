@@ -60,7 +60,7 @@ class Layout extends React.Component {
               display: `flex`,
               justifyContent: `flex-end`,
               alignItems: `center`,
-              fontSize: `1.5rem`,
+              fontSize: `1.3rem`,
             }}>
             <Link
               style={{
@@ -110,7 +110,7 @@ class Layout extends React.Component {
             style={{
               display: `flex`,
               justifyContent: `flex-end`,
-              fontSize: `1rem`,
+              fontSize: `0.8rem`,
               marginLeft: `${rhythm(1)}`,
             }}>
             <Link

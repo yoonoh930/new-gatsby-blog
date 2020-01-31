@@ -1,0 +1,54 @@
+---
+title: "How to fit polynomial regression as well as step function in R"
+category: "Wiki"
+date: "2020-01-21"
+tags:
+    - R
+    - Data Science
+---
+
+## The Function and the Library
+
+Fitting polynomials as well as step function doesn't require special library.  There are a few ways to polynomials and for the step function, we can just use `cut()` function on predictors.
+
+
+
+## Different ways of fitting polynomial regression.
+
+
+
+```R
+fit <- lm(y ~ poly(x, power), data=data)
+fit <- lm(y ~ poly(x, power, raw=T), data=data)
+fit <- lm(y ~ x + I(x^2) + ... + I(x^power), data=data)
+fit <- lm(y ~ cbind(x, x^2, ... , x^power), data=data)
+```
+
+They all have same prediction. There is `raw=T` paramter for the `poly` function. `poly()` without `raw=T` returns a matrix of orthogonal polynomials, which means that each column is a linear combination of a power of the variable. This is done so that each part captures the part that was not captured by the previous column.
+
+
+
+### How to find the appropriate power.
+
+There are two ways to find which power to use for polynomials: ANOVA and Cross-Validation.
+
+For ANOVA, models M1 and M2 must be nest models: predictors of M1 must be subset of M2. Then check p-value from the result of the following:
+
+```R
+fit.1 <- lm(y ~ x, data=data)
+fit.2 <- lm(y ~ poly(x, 2), data=data)
+anova(fit.1, fit.2)
+```
+
+Cross-Validation can be checked from its own wiki page.
+
+
+
+## How to fit step function
+
+We can simply use `cut()` function
+
+```R
+fit <- lm(y ~ cut(x), data=data)
+```
+

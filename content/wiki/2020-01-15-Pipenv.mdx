@@ -1,0 +1,41 @@
+---
+title: "`Pipenv`: Python Packaging Management Tool"
+category: "Wiki"
+date: "2020-01-15"
+tags:
+    - Python
+    - Package Management
+---
+
+## What is it??
+
+It is a packaging management for python. Instead of using `requirements.txt`, it uses `Pipfile`, `Pipfile.lock`.
+
+## Installation
+
+You can find detailed installation process [here](https://github.com/pypa/pipenv). For anyone using virtual environments, just use `pip`:
+
+```bash
+$ pip install --user pipenv
+```
+
+## Basic usage
+
+### Initialization with specific python version
+
+```bash
+$ pipenv install --python [Python Version]
+```
+
+### Activate virtual environment shell
+
+```bash
+$ pipenv shell
+```
+
+### Run certain commands
+
+```bash
+$ pipenv run [Commands]
+```
+

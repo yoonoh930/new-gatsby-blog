@@ -1,0 +1,117 @@
+---
+title: "How to do Ridge and Lasso in R"
+category: "Wiki"
+date: "2020-01-14"
+tags:
+    - Data Science
+    - R
+---
+
+## Methods
+
+This wiki article is to demonstrate how to do Ridge and Lasso in R
+
+## Library and Functions
+
+You can find functions for Ridge and Lasso in `glmnet` package. The name of fuction is `glmnet()`.
+
+## Basic Usage
+
+### Preparation
+
+You have to separate `x` and `y` to use `glmnet()`.
+
+```R
+x <- model.matrix(y ~ x., data)
+y <- data$y
+```
+
+
+
+### Calculation
+
+```R
+library(glmnet)
+
+# Different values of lambda
+grid <- 10^seq(10, -2, length = 100)
+
+ridge.mod <- glmnet(x, y, alpha = 0, lambda = grid)
+lasso.mod <- glmnet(x, y, alpha = 1, lambda = grid)
+```
+
+
+
+You can find values of lambdas in `model$lambda`.
+
+
+
+### Prediction
+
+You can find predicted coefficients for each data with different value of lambda as input value `s`.
+
+```
+predict(model, s = valLambda, type = "coefficients")
+```
+
+
+
+## Cross Validation
+
+
+
+### Preparation
+
+```R
+set.seed(1)
+train <- sample(1:nrow(x), nrow(x)/2)
+test <- (-train)
+
+x <- model.matrix(y ~ x., data)
+y <- data$y
+
+y.test <- y[test]
+```
+
+
+
+### Calculation
+
+```R
+set.seed(1)
+
+# Ridge
+cv.out.R <- cv.glmnet(x[train,], y[train], alpha = 0)
+
+# Lasso
+cv.out.L <- cv.glmnet(x[train,], y[train], alpha = 1)
+```
+
+Note that we don't need to feed any grid of lambdas. The `cv.glmnet()` function takes care of it.
+
+
+
+### How to find the optimal coefficients
+
+```R
+set.seed(1)
+
+# Ridge
+bestLam.R <- cv.out.R$lambda.min
+ridge.pred <- predict(cv.out.R, s = bestLam.R, newx = x[test,])
+mean((ridge.pred - y.test)^2) # To get MSE
+
+out.R <- glmnet(x, y, alpha = 0)
+coefR <- predict(out.R, type = "coefficients", s = bestLam.R)
+coefR
+
+# Lasso
+bestLam.L <- cv.out.L$lambda.min
+lasso.pred <- predict(cv.out.L, s = bestLam.L, newx = x[test,])
+mean((lasso.pred - y.test)^2) # To get MSE
+
+out.L <- glmnet(x, y, alpha = 1)
+coefL <- glmnet(out.L, type = "coefficients", s = bestLam.L)
+coefL
+```
+

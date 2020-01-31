@@ -1,0 +1,56 @@
+---
+title: "How to do bootstrap in R"
+date: "2020-01-07"
+category: "Wiki"
+tags:
+    - R
+    - Data Science
+---
+
+How to do bootstrap in R
+
+
+
+Bootstrap in R requires a function that accept replaced samples as input and yield statistic of interest
+
+
+
+## Estimating the Accuracy of a statistic of interst
+
+From *Introduction to Statistical Learning with Application in R*
+
+
+
+Let's say that there is a `Portfolio` dataset with two financial assets that yield X and Y. We want to invest $\alpha$ fraction into X and Y. The goal is to minimize the risk, or variance, of the investment. by choosing good value of $\alpha$ So it will be:
+$$
+Minimize: \:\:\:\: \text{Var}(\alpha X + (1 - \alpha)Y)
+$$
+Wrangling the equation leads to:
+$$
+\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
+$$
+So, in R, this would be
+
+```r
+alpha.fn <- function(data, index) {
+  X = data$X[index]
+  Y = data$Y[index]
+  return((var(Y) - cov(X,Y))/(var(X)+var(Y)-2*cov(X,Y)))
+}
+
+boot(Portfolio, alpha.fn, R=1000) # Does bootstraping 1000 times
+```
+
+
+
+## Estimating the Accuracy of a Linear Regression Model
+
+Boostraping can be used to asses variability of coefficients and predictions from different models.
+
+```r
+# Using Auto data
+boot.fn=function(data, index)
+  return(coef(lm(mpg ~ horsepower, data = data, subset = index)))
+boot(Auto, boot.fn, 1000)
+```
+

@@ -1,0 +1,42 @@
+---
+title: "How to perform PCR and PLS in R"
+category: "Wiki"
+date: "2020-01-15"
+tags:
+    - Data Science
+    - R
+---
+
+## The Function and The Library
+
+PCR and PLS are part of `pls` library. One can perform them using `pcr()` and `plsr()` function, respectively.
+
+
+
+## Basic Usage with Cross Validation
+
+```R
+library(pls)
+
+set.seed(2)
+## PCR
+pcr.fit <- pcr(y ~ x, data = data, scale = TRUE, validation = "CV")
+pcr.pred <- predict(pcr.fit, testX, ncomp=numComp)
+
+## PLS
+pls.fit <- plsr(y ~ x, data = data, scale = TRUE, validation = "CV")
+pls.pred <- predict(pls.fit, testX, ncomp=numComp)
+```
+
+
+
+## Plotting
+
+You can use `validationplot()` to visualize which model with varying number of components have the lowest value for criterion.
+
+```R
+validationplot(model, val.type = "MSEP") # Available option: "RMSEP", "MSEP", "R2"
+```
+
+
+

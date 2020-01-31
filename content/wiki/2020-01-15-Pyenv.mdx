@@ -1,0 +1,82 @@
+---
+title: "`Pyenv`: Python Version Management"
+category: "Wiki"
+date: "2020-01-15"
+tags:
+    - Python
+    - Version Management
+---
+
+## What is this?
+
+This is a python package to manage versions of python for each project.
+
+## How to install it?
+
+Check out at their [official github page](https://github.com/pyenv/pyenv#installation)
+
+## List of commands
+
+You can get a list of available commands on your terminal with the following command:
+
+```bash
+$ pyenv commands
+```
+
+List of commands are :
+```bash
+$ pyenv commands
+$ pyenv local
+$ pyenv global
+$ pyenv shell
+$ pyenv install
+$ pyenv uninstall
+$ pyenv rehash
+$ pyenv version
+$ pyenv versions
+$ pyenv which
+$ pyenv whence
+```
+
+## Basic usage
+
+### Set local python version
+
+```bash
+$ pyenv local [Version Number]
+```
+
+If no [Version Number] provided, then it will report the local version.
+
+### Set global python version
+
+```bash
+$ pyenv global [Version Number]
+```
+
+If no [Version Number] provided, then it will report the global version.
+
+### Check currently active python version
+
+```bash
+pyenv version
+```
+
+### Install specific python version
+
+```bash
+$ pyenv isntall [Version Number]
+```
+
+### Get a list of locally available python versions to install
+
+```bash
+$ pyenv versions
+```
+
+### Get a list of available python versions to install
+
+```bash
+$ pyenv install --list
+```
+

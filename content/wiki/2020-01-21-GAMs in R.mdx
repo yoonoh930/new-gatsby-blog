@@ -1,0 +1,48 @@
+---
+title: "How to fit GAMs in R"
+category: "Wiki"
+date: "2020-01-21"
+tags:
+    - R
+    - Data Science
+---
+
+## The Function and the Library
+
+The GAMs, we use `gam` library, as well as `gam()` function to fit the model. When fitting smooth spline, we use `s()` on predictors, fitting local spline, `lo()` on predictors. 
+
+
+
+## Basic Usage
+
+```R
+library(gam)
+gam.1 <- gam(z ~ s(x, 3) + s(y,5), data=data)
+gam.2 <- gam(z ~ s(x, 3) + lo(y, span=0.3), data=data)
+# Interaction
+gam.3 <- gam(z ~ lo(x,y,span=0.5))
+```
+
+
+
+### Plotting the `GAMs` Model
+
+```R
+# No Interaction
+plot(gam.1)
+# Interaction
+library(akima)
+plot(gam.3)
+```
+
+
+
+## Choosing the best model: Use ANOVA
+
+```R
+gam.m1 <- gam(z ~ s(x, 3), data=data)
+gam.m2 <- gam(z ~ y + s(x, 3), data=data)
+anova(gam.m1, gam.m2, test="F")
+```
+
+Note that the test is `"F"`

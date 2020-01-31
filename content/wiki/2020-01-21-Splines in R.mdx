@@ -1,0 +1,51 @@
+---
+title: "How to fit splines in R"
+category: "Wiki"
+date: "2020-01-21"
+tags:
+    - R
+    - Data Science
+---
+
+## The Function and the Library
+
+We need `splines` library as well as `bs()` function to generate entire matrix of basis function with default of cubic and `ns()` function for natural splines. For the smooth spline, `smooth.spline()` is used to fit and `loess()` for the local spline.
+
+
+
+## Basic Usage
+
+### Basis function and natural spline
+
+```R
+#With basis
+fit <- lm(y ~ bs(x, knots=knots, degree=3), data=data)
+fit <- lm(y ~ bs(x, df=df, degree=3), data=data)
+#With natural spline
+fit <- lm(y ~ ns(x, knots=knots, degree=3), data=data)
+fit <- lm(y ~ ns(x, df=df, degree=3), data=data)
+```
+
+Note that for cubic spline, when there are 3 knots, the input degree of freedom is 6 because the total of 7(3 for x, x^1, x^2, 3 for 3 knots and 1 for intercept) - 1 degree of freedom consumed by the intercept.
+
+
+
+### Smooth Spline
+
+We use `smooth.spline()`. For the function, we feed `x` and `y` separately.
+
+```R
+fit <- smooth.spline(x, y, df=df)
+fit <- smooth.spline(x, y, cv=TRUE) #CV
+```
+
+
+
+### Local Regression
+
+For the local regression, we use `loess()`. We have to feed `span` value.
+
+```R
+fit <- loess(y ~ x, span=span, data=data)
+```
+

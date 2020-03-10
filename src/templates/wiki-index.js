@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 
 import styled from "@emotion/styled";
 
+import { rhythm } from "../utils/typography"
+
 class WikiItems extends React.Component {
 
     getUniqTags() {
@@ -50,6 +52,9 @@ class WikiItems extends React.Component {
         `;
 
         const WikiArticleLink = styled(Link)`
+            p {
+                margin-bottom: ${rhythm(0.3)}
+            } 
         `;
 
         return (

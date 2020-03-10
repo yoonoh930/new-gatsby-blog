@@ -26,7 +26,7 @@ fit <- lm(y ~ ns(x, knots=knots, degree=3), data=data)
 fit <- lm(y ~ ns(x, df=df, degree=3), data=data)
 ```
 
-Note that for cubic spline, when there are 3 knots, the input degree of freedom is 6 because the total of 7(3 for x, x^1, x^2, 3 for 3 knots and 1 for intercept) - 1 degree of freedom consumed by the intercept.
+Note that for cubic spline, when there are 3 knots, the input degree of freedom is 6 because the total of 7(3 for $x, x^2, x^3$ 3 for 3 knots and 1 for intercept) - 1 degree of freedom consumed by the intercept.
 
 
 

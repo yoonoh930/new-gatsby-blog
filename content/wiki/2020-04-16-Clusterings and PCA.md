@@ -1,0 +1,106 @@
+---
+title: "How to do PCA/K-means/Hierarchial clustering in R"
+category: "Wiki"
+date: "2020-04-16"
+tags:
+    - R
+	- Data Science
+
+---
+
+## The Functions and the Library
+
+
+
+***PCA***
+
+* `prcomp()`
+
+
+
+***K-Means Clustering***
+
+* `kmeans()`
+
+
+
+***Hierarchial Clustering***
+
+* `hclust()`
+
+
+
+## PCA
+
+
+
+Scaling is important. Otherwise, due to the nature of principle component that put significance on variance, predictors with huge magnitude will be favored.
+
+```R
+## How to use the function
+pr.out <- prcomp(data, scale=TRUE)
+
+pr.out$center   # mean
+pr.out$scale    # std
+pr.out$rotation # matrix of PC loadings
+pr.out$x        # PC score vectors
+```
+
+
+
+### How to get PVE(Proportion of Variance Explained) graph
+
+
+
+```R
+pr.var <- pr.out$sdev^2
+pve <- pr.var/sum(pr.var)
+plot(pve, xlab="Principal Component", ylab="Proportion of Variance Explained", ylim=c(0,1), type='b')
+```
+
+### 
+
+## K-Means Clustering
+
+
+
+`nstart` argument choose multiple initial clusteres. It's recommended to choose between 20 and 50.
+
+
+
+```R
+# Basic Usuage
+km.out <- kmeans(data, number of clusters, nstart=20)
+
+km.out$tot.withinss # ss within the clusters
+
+# Visualizing the cluster
+plot(data, col=(km.out$cluster+1))
+```
+
+
+
+
+
+## Hierarchial Clustering
+
+
+
+For euclidean dissimilarity measure, we use `dist()`.
+
+```R
+# Basic Usage
+hc <- hclust(dist(x), method="complete" or "average" or "single")
+
+# Visualizing it
+plot(hc)
+
+# Cutting the tree
+cutree(hc, desired number of groups)
+
+# Correlation based distance
+dd <- as.dist(1-cor(t(data)))
+hc <- hclust(dd, method=any method)
+plot(hc)	
+```
+

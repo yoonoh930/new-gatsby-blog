@@ -35,11 +35,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create blog posts pages.
   const posts = result.data.allMdx.edges
-  const wikiPosts = [];
-  const blogPosts = [];
+  const wikiPosts = []
+  const blogPosts = []
 
-  posts.forEach((post) => {
-
+  posts.forEach(post => {
     // Making node separately for wiki and regular blog post.
     if (["Wiki", "wiki"].includes(post.node.frontmatter.category)) {
       wikiPosts.push(post)
@@ -48,18 +47,19 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   })
 
-  wikiPosts.forEach((post) => {
+  wikiPosts.forEach(post => {
     createPage({
-        path: post.node.fields.slug,
-        component: wikiArticle,
-        context: {
-          slug: post.node.fields.slug
-        },
-      })
+      path: post.node.fields.slug,
+      component: wikiArticle,
+      context: {
+        slug: post.node.fields.slug,
+      },
+    })
   })
 
   blogPosts.forEach((post, index) => {
-    const previous = index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
+    const previous =
+      index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
     const next = index === 0 ? null : blogPosts[index - 1].node
 
     createPage({
@@ -82,7 +82,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: value,
     })
   }
 }

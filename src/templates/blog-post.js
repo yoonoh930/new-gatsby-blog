@@ -9,11 +9,18 @@ import MDXRenderer from "../components/MDX"
 
 import { rhythm, scale } from "../utils/typography"
 
+import { DiscussionEmbed } from "disqus-react"
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
+
+    const disqusConfig = {
+      shortname: process.env.GATSBY_DISQUS_NAME,
+      config: { identifier: this.props.slug },
+    }
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -41,12 +48,13 @@ class BlogPostTemplate extends React.Component {
               {post.frontmatter.date}
             </p>
           </header>
-          <MDXRenderer content={post.body}/>
+          <MDXRenderer content={post.body} />
           <hr
             style={{
               marginBottom: rhythm(1),
             }}
           />
+          <DiscussionEmbed {...disqusConfig} />
           <footer>
             <Bio />
           </footer>

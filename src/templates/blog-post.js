@@ -9,7 +9,9 @@ import MDXRenderer from "../components/MDX"
 
 import { rhythm, scale } from "../utils/typography"
 
-import { DiscussionEmbed } from "disqus-react"
+// import { DiscussionEmbed } from "disqus-react"
+
+import { Disqus, CommentCount } from "gatsby-plugin-disqus"
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -17,9 +19,15 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
 
+    // const disqusConfig = {
+    //   shortname: process.env.GATSBY_DISQUS_NAME,
+    //   config: { identifier: this.props.slug },
+    // }
+
     const disqusConfig = {
-      shortname: process.env.GATSBY_DISQUS_NAME,
-      config: { identifier: this.props.slug },
+      // url: `${config.siteUrl + location.pathname}`,
+      identifier: post.id,
+      title: post.title,
     }
 
     return (
@@ -54,7 +62,8 @@ class BlogPostTemplate extends React.Component {
               marginBottom: rhythm(1),
             }}
           />
-          <DiscussionEmbed {...disqusConfig} />
+          {/* <DiscussionEmbed {...disqusConfig} /> */}
+          <Disqus config={disqusConfig} />
           <footer>
             <Bio />
           </footer>

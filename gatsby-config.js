@@ -51,14 +51,14 @@ module.exports = {
             resolve: `gatsby-remark-prismjs`,
             options: {
               showLineNumbers: true,
-            }
+            },
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
           {
             resolve: `gatsby-remark-katex`,
             options: {
-              strict: `ignore`
+              strict: `ignore`,
             },
           },
         ],
@@ -96,6 +96,12 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `yoons-blog`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
